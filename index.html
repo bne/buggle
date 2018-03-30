@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <script>
+      var countdown = 0;
+      var timeout;
+      function buggle() {
+        var dice = [
+          ['I', 'L', 'R', 'E', 'D', 'X'], ['O', 'J', 'B', 'O', 'A', 'B'],
+          ['A', 'G', 'A', 'E', 'E', 'N'], ['E', 'Y', 'T', 'L', 'R', 'T'],
+          ['M', 'U', 'Qu', 'H', 'N', 'I'], ['Z', 'H', 'R', 'L', 'N', 'N'],
+          ['T', 'S', 'T', 'I', 'Y', 'D'], ['N', 'E', 'I', 'U', 'E', 'S'],
+          ['T', 'M', 'I', 'O', 'C', 'U'], ['T', 'E', 'R', 'W', 'H', 'V'],
+          ['S', 'S', 'O', 'I', 'T', 'E'], ['A', 'S', 'P', 'F', 'F', 'K'],
+          ['A', 'W', 'T', 'O', 'O', 'T'], ['E', 'E', 'H', 'N', 'G', 'W'],
+          ['V', 'E', 'R', 'L', 'Y', 'D'], ['H', 'C', 'P', 'O', 'A', 'S'],
+        ];
+        Array.prototype.forEach.call(
+          document.getElementById('table').getElementsByTagName('td'),
+          function(td) {
+            var die = dice.splice(Math.floor(Math.random()*dice.length), 1)[0];
+            var letter = die[Math.floor(Math.random()*6)];
+            td.innerHTML = '<div>' + letter + '</div>';
+          }
+        );
+        countdown = 180;
+        debuggle();
+      };
+      function debuggle() {
+        clearTimeout(timeout);
+        if (countdown == 0) {
+          Array.prototype.forEach.call(
+            document.getElementById('table').getElementsByTagName('td'),
+            function(td) { td.innerHTML = '<div>?</div>'; });
+          document.getElementById('button').innerHTML = 'Let\'s Buggle!';
+        }
+        else {
+          timeout = setTimeout(debuggle, 1000);
+          countdown--;
+          document.getElementById('button').innerHTML = countdown;
+        }
+      }
+    </script>
+    <style>
+      table, button {
+        width: 100%;
+      }
+      td {
+        text-align: center;
+        width: 25%;
+        position: relative;
+        background-color: #ccc;
+        font-size: 10em;
+      }
+      td:after {
+        content: '';
+        display: block;
+        margin-top: 100%;
+      }
+      td div {
+        position: absolute;
+        top: 0.3em;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+      }
+      button {
+        font-size: 5em;
+      }
+    </style>
+  </head>
+  <body onload="debuggle()">
+    <table id="table">
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <button id="button" onclick="buggle()"></button>
+  </body>
+</html>
