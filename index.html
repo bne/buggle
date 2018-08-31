@@ -16,11 +16,11 @@
           ['V', 'E', 'R', 'L', 'Y', 'D'], ['H', 'C', 'P', 'O', 'A', 'S'],
         ];
         Array.prototype.forEach.call(
-          document.getElementById('table').getElementsByTagName('td'),
-          function(td) {
+          document.getElementsByClassName('item'),
+          function(item) {
             var die = dice.splice(Math.floor(Math.random()*dice.length), 1)[0];
             var letter = die[Math.floor(Math.random()*6)];
-            td.innerHTML = '<div>' + letter + '</div>';
+            item.innerHTML = letter;
           }
         );
         countdown = 180;
@@ -30,8 +30,9 @@
         clearTimeout(timeout);
         if (countdown == 0) {
           Array.prototype.forEach.call(
-            document.getElementById('table').getElementsByTagName('td'),
-            function(td) { td.innerHTML = '<div>?</div>'; });
+            document.getElementsByClassName('item'),
+            function(td) { td.innerHTML = '?';
+          });
           document.getElementById('button').innerHTML = 'Let\'s Buggle!';
         }
         else {
@@ -42,44 +43,61 @@
       }
     </script>
     <style>
-      table, button {
-        width: 100%;
+      .container {
+        display: flex;
+        justify-content: start;
+        flex-wrap: wrap;
       }
-      td {
-        text-align: center;
-        width: 25%;
-        position: relative;
-        background-color: #ccc;
-        font-size: 10em;
+      .cell {
+        flex: 0 0 25%;
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        padding: 0.25rem;
+        box-sizing: border-box;
       }
-      td:after {
+      .cell:before {
         content: '';
-        display: block;
-        margin-top: 100%;
+        display: table;
+        padding-top: 100%;
       }
-      td div {
-        position: absolute;
-        top: 0.3em;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        width: 100%;
-        height: 100%;
+      .item {
+        flex-grow: 1;
+        border: 1px solid #666;
+        background: #ccc;
+        font-size: 10em;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       button {
+        width: 100%;
         font-size: 4em;
-        margin-top: 2em;
+        line-height: 2em;
+        margin-top: 1em;
       }
     </style>
   </head>
   <body onload="debuggle()">
-    <table id="table">
-      <tr><td></td><td></td><td></td><td></td></tr>
-      <tr><td></td><td></td><td></td><td></td></tr>
-      <tr><td></td><td></td><td></td><td></td></tr>
-      <tr><td></td><td></td><td></td><td></td></tr>
-    </table>
+    <div class="container">
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+      <div class="cell"><div class="item"></div></div>
+    </div>
     <button id="button" onclick="buggle()"></button>
   </body>
 </html>
